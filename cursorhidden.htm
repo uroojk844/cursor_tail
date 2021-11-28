@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html,body{
+            margin: 0;
+            cursor: none;
+        }
+    #cursor, .circle{
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border: 1px solid #000;
+        border-radius: 50%;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+    }
+    .circle{
+        border-color: transparent;
+    }
+    
+    </style>
+</head>
+<body>
+    <div id="cursor"></div>
+
+    <script>
+        let c = document.getElementById('cursor');
+        window.onmousemove = function(e){
+            let y = e.clientY+"px";
+            let x = e.clientX+"px";
+            c.style.top=y;
+            c.style.left=x;
+            c.style.transform="translate(-"+x+"%, -"+y+"%)"; 
+            let elm = document.createElement('div');
+            elm.setAttribute('class', 'circle');
+            elm.style.top = y;
+            elm.style.left = x;
+            elm.style.transform="translate(-"+x+"%, -"+y+"%)";
+            elm.style.backgroundColor = '#'+Math.floor((Math.random() * 999999) + 111111);
+            document.body.append(elm);
+            setTimeout(() => {
+                document.body.removeChild(elm)
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
